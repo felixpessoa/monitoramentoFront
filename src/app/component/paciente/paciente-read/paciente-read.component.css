@@ -1,0 +1,12 @@
+.container {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  table {
+      width: 100%;
+  }
+
+  .form-field {
+    width: 200px;
+  }
