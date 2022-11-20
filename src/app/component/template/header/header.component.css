@@ -12,6 +12,11 @@
     color: white;
 }
 
+mat-icon {
+    margin-right: 8px;
+}
+
+
 /* .nav {
     width: 100%;
     display: flex;
