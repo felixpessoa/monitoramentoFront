@@ -1,9 +1,9 @@
-import { MatPaginator } from '@angular/material/paginator';
 import { Paciente } from './../paciente.model';
 import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import Swal from 'sweetalert2';
 import { PacienteService } from '../paciente.service';
 
 @Component({
@@ -13,31 +13,31 @@ import { PacienteService } from '../paciente.service';
 })
 export class PacienteCreateComponent implements OnInit {
 
-  
   data = moment().format('YYYY-MM-DD');
-  data2 = moment().format('YYYY-MM-DD');
-  data3 = moment().format('YYYY-MM-DD');
-  data4 = moment().format('YYYY-MM-DD');
+
   form: any = FormGroup;
-  paciente: Paciente = {};
+  paciente: Paciente = {
+    dataNascimento: this.data
+  };
+
 
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private service: PacienteService,
-    
+
   ) {
     this.form = this.fb.group({
-      nome: [],
-      sexo: [],
+      nome: ['', Validators.required],
+      sexo: ['', Validators.required],
       dataNascimento: [],
       dataAdmissao: [],
       numeroDoGal: [],
       dataDaColetaCovid: [],
       amostra: [],
       localDeColetaCovid: [],
-      statusCovid: [],
+      statusCovid: ['', Validators.required],
       municipioDeOrigem: [],
       statusInfluenza: [],
       vacina: [],
@@ -45,10 +45,10 @@ export class PacienteCreateComponent implements OnInit {
       tr: [],
       dataColetaTr: [],
       localColetaTr: [],
-      statusTr: [],
+      statusTr: ['', Validators.required],
       dataCadastro: []
     })
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -58,46 +58,63 @@ export class PacienteCreateComponent implements OnInit {
     this.paciente.dataAdmissao = moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
     this.paciente.dataDaColetaCovid = moment.utc(this.form.value.dataDaColetaCovid).format('DD/MM/YYYY')
     this.paciente.dataColetaTr = moment.utc(this.form.value.dataColetaTr).format('DD/MM/YYYY')
-    console.log("teste pact "+this.paciente.dataNascimento)
-    console.log("teste form "+this.form.value.dataNascimento)
-    
+    console.log("teste pact " + this.paciente.dataNascimento)
+    console.log("teste form " + this.form.value.dataNascimento)
+
   }
 
-  create(){
-    this.paciente.nome = this.form.value.nome;
-    this.paciente.sexo = this.form.value.sexo;
-    this.paciente.dataNascimento = moment.utc(this.form.value.dataNascimento).format('DD/MM/YYYY')
-    this.paciente.dataAdmissao = moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
-    this.paciente.numeroDoGal = this.form.value.numeroDoGal;
-    this.paciente.dataDaColetaCovid = moment.utc(this.form.value.dataDaColetaCovid).format('DD/MM/YYYY')
-    this.paciente.amostra = this.form.value.amostra;
-    this.paciente.localDeColetaCovid = this.form.value.localDeColetaCovid;
-    this.paciente.statusCovid = this.form.value.statusCovid;
-    this.paciente.municipioDeOrigem = this.form.value.municipioDeOrigem;
-    this.paciente.statusInfluenza = this.form.value.statusInfluenza;
-    this.paciente.vacina = this.form.value.vacina;
-    this.paciente.comorbidade = this.form.value.comorbidade;
-    this.paciente.tr = this.form.value.tr;
-    if(this.form.value.dataColetaTr == null){
-      this.paciente.dataColetaTr = "";
-    }else{
-      this.paciente.dataColetaTr = moment.utc(this.form.value.dataColetaTr).format('DD/MM/YYYY')
-    }
-    this.paciente.localColetaTr = this.form.value.localColetaTr;
-    this.paciente.statusTr = this.form.value.statusTr;
-    this.paciente.ativo = this.form.value.ativo;
+  create() {
+    if (this.form.valid) {
 
-    console.log(this.paciente);
 
-    this.service.create(this.paciente).subscribe(() => {
-      this.service.showMessage('Paciente salvo com sucesso!')
+      this.paciente.nome = this.form.value.nome;
+      this.paciente.sexo = this.form.value.sexo;
+      this.paciente.dataNascimento = this.form.value.dataNascimento == null ? this.form.value.dataNascimento : moment.utc(this.form.value.dataNascimento).format('DD/MM/YYYY')
+      this.paciente.dataAdmissao = this.form.value.dataAdmissao == null ? this.form.value.dataAdmissao : moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
+      this.paciente.numeroDoGal = this.form.value.numeroDoGal;
+      this.paciente.dataDaColetaCovid = this.form.value.dataDaColetaCovid == null ? this.form.value.dataDaColetaCovid : moment.utc(this.form.value.dataDaColetaCovid).format('DD/MM/YYYY')
+      this.paciente.amostra = this.form.value.amostra;
+      this.paciente.localDeColetaCovid = this.form.value.localDeColetaCovid;
+      this.paciente.statusCovid = this.form.value.statusCovid;
+      this.paciente.municipioDeOrigem = this.form.value.municipioDeOrigem;
+      this.paciente.statusInfluenza = this.form.value.statusInfluenza;
+      this.paciente.vacina = this.form.value.vacina;
+      this.paciente.comorbidade = this.form.value.comorbidade;
+      this.paciente.tr = this.form.value.tr;
+      this.paciente.dataColetaTr = this.form.value.dataColetaTr == null ? this.form.value.dataColetaTr : moment.utc(this.form.value.dataColetaTr).format('DD/MM/YYYY')
+      this.paciente.localColetaTr = this.form.value.localColetaTr;
+      this.paciente.statusTr = this.form.value.statusTr;
+      this.paciente.ativo = this.form.value.ativo == undefined ? null : this.form.value.ativo;
+
+      console.log(this.paciente);
+      // console.log(this.form.value);
+
+
+      this.service.create(this.paciente).subscribe(() => {
+        this.service.showMessage('Paciente salvo com sucesso!')
         this.router.navigate(['/pacientes-read'])
-    })
+      })
+
+    } else
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos obrigatórios faltando.',
+        text: 'Por favor, preencher todos os campos com (*) ou em vermelho!',
+      })
 
   }
 
-  cancel(){
+  cancel() {
 
   }
+
+  postar() {
+    if (!this.form.valid) {
+      return
+    }
+  }
+
+
+
 
 }

@@ -26,8 +26,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,12 +58,13 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     FormsModule,
     MatNativeDateModule,
+    CommonModule,
   ],
   providers: [
     {
       provide: MAT_DATE_LOCALE,
       useValue: 'pt-BR'
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })
