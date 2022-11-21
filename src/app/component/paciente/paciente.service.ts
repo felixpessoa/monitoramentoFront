@@ -34,8 +34,8 @@ export class PacienteService {
   }
 
   errorHandler(e: any): Observable<any> {
-    console.log("EEEEEEEEEEEERRRRRRRRRRRO "+JSON.stringify(e.message))
-    this.showMessage(e.message, true);
+    console.log(e);
+    this.showMessage("Ocorreu um erro!", true);
     return EMPTY
   }
 
@@ -49,13 +49,19 @@ export class PacienteService {
   }
 
   showMessage(msg: string, isError: boolean = false): void {
-    if (!isError) {
-
-    }else{
+    if (isError) {
       Swal.fire({
         icon: 'error',
         title: 'algo deu errado...',
         text: msg,
+      })
+    }else{
+      Swal.fire({
+        icon: 'success',
+        title: 'Tudo certo.',
+        text: msg,
+        // showConfirmButton: false,
+        // timer: 1500
       })
     }
   }
