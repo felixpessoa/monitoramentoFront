@@ -12,9 +12,12 @@ import * as moment from 'moment';
 })
 export class PacienteEditComponent implements OnInit {
 
+
+  dt= '11/12/2020';
   form: any = FormGroup;
   paciente: Paciente = {};
-  data: any = moment.utc(this.paciente.dataNascimento).format('MM/DD/YYYY')
+  // data: any = moment.utc(this.paciente.dataNascimento).format('MM/DD/YYYY')
+  data: any;
 
   constructor(
     private fb: FormBuilder,
@@ -49,10 +52,27 @@ export class PacienteEditComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id')!
     this.service.findById(id).subscribe( data => {
       this.paciente = data;
-      this.form.value.dataNascimento = this.paciente.dataNascimento;
+      // this.form.patchValue({
+      //   dataNascimento: moment.utc(data.id).format('MM/DD/YYYY'),
+      // })
+      // this.form.value.dataNascimento = this.paciente.dataNascimento;
       console.log(this.paciente)
-      console.log(this.data)
+      console.log('data 1',data.dataNascimento)
+      this.data = moment.utc(data.dataNascimento).format('YYYY-MM-DD');
+      let test = this.data;
+      console.log('data let',test)
+
+      this.form.patchValue({
+        // dataNascimento: moment.utc(data.dataNascimento).format('YYYY-DD-MM'),
+        dataNascimento: moment.utc(data.dataNascimento).format('YYYY-MM-DD'),
+      })
+
+
+      // this.data = moment.utc(data.dataNascimento).format('YYYY-MM-DD')
+      console.log('data 1',this.data)
+      console.log('data 2',this.form.value.dataNascimento)
     });
+    
   }
 
 }

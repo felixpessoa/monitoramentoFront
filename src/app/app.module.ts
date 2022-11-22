@@ -30,6 +30,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { PacienteEditComponent } from './component/paciente/paciente-edit/paciente-edit.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +67,7 @@ import { PacienteEditComponent } from './component/paciente/paciente-edit/pacien
     {
       provide: MAT_DATE_LOCALE,
       useValue: 'pt-BR'
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

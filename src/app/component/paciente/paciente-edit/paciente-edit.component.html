@@ -31,7 +31,7 @@
                     <mat-form-field class="example-full-width">
                         <mat-label>Data de nascimento</mat-label>
                         <!-- <input matInput [matDatepicker]="date" formControlName="dataNascimento"> -->
-                        <input matInput [matDatepicker]="date" formControlName="dataNascimento" [disabled]="true">
+                        <input matInput [matDatepicker]="date" [(ngModel)]="data" formControlName="dataNascimento" [disabled]="true">
                         <!-- <mat-hint></mat-hint> -->
                         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
                         <mat-datepicker #date disabled="false"></mat-datepicker>
