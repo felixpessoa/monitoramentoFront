@@ -28,6 +28,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
+import { PacienteEditComponent } from './component/paciente/paciente-edit/paciente-edit.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     NavComponent,
     PacienteReadComponent,
-    PacienteCreateComponent
+    PacienteCreateComponent,
+    PacienteEditComponent
   ],
   imports: [
     BrowserModule,

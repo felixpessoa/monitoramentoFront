@@ -15,7 +15,7 @@ export class PacienteReadComponent implements OnInit {
   
   pacientes: Paciente[] = [];
 
-  displayedColumns: string[] = ['id', 'nome', 'sexo', 'ativo', 'dataNascimento'];
+  displayedColumns: string[] = ['id', 'nome', 'sexo', 'ativo', 'dataNascimento', 'action'];
   //   
   dataSource = new MatTableDataSource<Paciente>(this.pacientes);
 

@@ -35,6 +35,22 @@
       <td mat-cell *matCellDef="let element"> {{element.dataNascimento}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let row">
+          <a routerLink="/paciente-edit/{{row.id}}" class="edit">
+              <i class="material-icons">
+                account_box
+              </i>
+          </a>
+          <!-- <a routerLink="/livros/delete/{{ row.id }}" class="delete">
+              <i class="material-icons">
+                  delete
+              </i>
+          </a> -->
+      </td>
+    </ng-container>
+
     <!-- <ng-container matColumnDef="ativo">
           <th mat-header-cell *matHeaderCellDef> Ativo </th>
           <td mat-cell *matCellDef="let element"> {{element.ativo}} </td>

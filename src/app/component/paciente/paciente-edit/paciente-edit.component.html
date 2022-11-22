@@ -1,0 +1,169 @@
+<mat-card>
+
+    <mat-card-title>Novo Paciente</mat-card-title>
+    <form [formGroup]="form">
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Registro" [(ngModel)]="paciente.id" formControlName="id">
+                    </mat-form-field>
+
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Nome completo" [(ngModel)]="paciente.nome" formControlName="nome">
+                    </mat-form-field>
+
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Sexo</mat-label>
+                        <mat-select [(ngModel)]="paciente.sexo" formControlName="sexo">
+                            <mat-option value="M">Masculino</mat-option>
+                            <mat-option value="F">Feminino</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data de nascimento</mat-label>
+                        <!-- <input matInput [matDatepicker]="date" formControlName="dataNascimento"> -->
+                        <input matInput [matDatepicker]="date" formControlName="dataNascimento" [disabled]="true">
+                        <!-- <mat-hint></mat-hint> -->
+                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                        <mat-datepicker #date disabled="false"></mat-datepicker>
+                    </mat-form-field>
+
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data de Admissão</mat-label>
+                        <input matInput [matDatepicker]="date2" [(ngModel)]="paciente.dataAdmissao" formControlName="dataAdmissao" [disabled]="true">
+                        <mat-hint></mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="date2"></mat-datepicker-toggle>
+                        <mat-datepicker #date2 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Número do Gal" [(ngModel)]="paciente.numeroDoGal" formControlName="numeroDoGal">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data da coleta (TESTE COVID-19)</mat-label>
+                        <input matInput [matDatepicker]="date3" [(ngModel)]="paciente.dataDaColetaCovid" formControlName="dataDaColetaCovid" [disabled]="true">
+                        <mat-hint></mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="date3"></mat-datepicker-toggle>
+                        <mat-datepicker #date3 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Tipo de amostra" [(ngModel)]="paciente.amostra" formControlName="amostra">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Local da coleta (TESTE COVID-19)" [(ngModel)]="paciente.localDeColetaCovid"
+                            formControlName="localDeColetaCovid">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Status (TESTE COVID-19)</mat-label>
+                        <mat-select [(ngModel)]="paciente.statusCovid" formControlName="statusCovid">
+                            <mat-option value="-">-</mat-option>
+                            <mat-option value="AMOSTRA INSUFICIENTE">AMOSTRA INSUFICIENTE</mat-option>
+                            <mat-option value="COVID-19(-); INFLUENZA(-)">COVID-19(-); INFLUENZA(-)</mat-option>
+                            <mat-option value="COVID-19 (-); INFLUENZA (?)">COVID-19 (-); INFLUENZA (?)</mat-option>
+                            <mat-option value="DETECTÁVEL">DETECTÁVEL</mat-option>
+                            <mat-option value="EM ANDAMENTO">EM ANDAMENTO</mat-option>
+                            <mat-option value="INCONCLUSIVO">INCONCLUSIVO</mat-option>
+                            <mat-option value="INCONSISTENTE">INCONSISTENTE</mat-option>
+                            <mat-option value="NÃO COLETADO">NÃO COLETADO</mat-option>
+                            <mat-option value="NÃO DETECTÁVEL">NÃO DETECTÁVEL</mat-option>
+                            <mat-option value="NÃO REAGENTE">NÃO REAGENTE</mat-option>
+                            <mat-option value="NEGATIVO">NEGATIVO</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Município de origem" [(ngModel)]="paciente.municipioDeOrigem" formControlName="municipioDeOrigem">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Vacina" [(ngModel)]="paciente.vacina" formControlName="vacina">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Comorbidade" [(ngModel)]="paciente.comorbidade" formControlName="comorbidade">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="TR" [(ngModel)]="paciente.tr" formControlName="tr">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data coleta (TR)</mat-label>
+                        <input matInput [matDatepicker]="date4" [(ngModel)]="paciente.dataColetaTr" formControlName="dataColetaTr" [disabled]="true">
+                        <mat-hint></mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="date4"></mat-datepicker-toggle>
+                        <mat-datepicker #date4 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Local Coleta (TR)" [(ngModel)]="paciente.localColetaTr" formControlName="localColetaTr">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Status (TR)</mat-label>
+                        <mat-select [(ngModel)]="paciente.statusTr" formControlName="statusTr">
+                            <mat-option value="-">-</mat-option>
+                            <mat-option value="NÃO REAGENTE">NÃO REAGENTE</mat-option>
+                            <mat-option value="REAGENTE">REAGENTE</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+<!-- 
+    <button mat-raised-button (click)="create()" color="primary">
+        Salvar
+    </button>
+
+    <button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button> -->
+
+</mat-card>

@@ -33,6 +33,14 @@ export class PacienteService {
         );
   }
 
+  findById(id: number): Observable<Paciente> {
+    const url = `${this.baseUrl}/${id}`
+    return this.http.get<Paciente>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
+
   errorHandler(e: any): Observable<any> {
     console.log(e);
     this.showMessage("Ocorreu um erro!", true);

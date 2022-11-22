@@ -1,3 +1,4 @@
+import { PacienteEditComponent } from './component/paciente/paciente-edit/paciente-edit.component';
 import { PacienteCreateComponent } from './component/paciente/paciente-create/paciente-create.component';
 import { PacienteReadComponent } from './component/paciente/paciente-read/paciente-read.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'pacientes-create',
     component: PacienteCreateComponent
+  },
+  {
+    path: 'paciente-edit/:id',
+    component: PacienteEditComponent
   }
 ];
 
