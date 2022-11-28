@@ -36,6 +36,7 @@ export class PacienteReadComponent implements OnInit {
         this.pacientes = res;
         this.dataSource = new MatTableDataSource<Paciente>(this.pacientes);
         this.dataSource.paginator = this.paginator;
+        console.log(res)
       },
       error: (error) => {
         console.log(error);

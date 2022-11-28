@@ -29,6 +29,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { PacienteEditComponent } from './component/paciente/paciente-edit/paciente-edit.component';
+import { InternamentoReadComponent } from './component/internamento/internamento-read/internamento-read.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { PacienteEditComponent } from './component/paciente/paciente-edit/pacien
     NavComponent,
     PacienteReadComponent,
     PacienteCreateComponent,
-    PacienteEditComponent
+    PacienteEditComponent,
+    InternamentoReadComponent
   ],
   imports: [
     BrowserModule,
@@ -64,10 +66,7 @@ import { PacienteEditComponent } from './component/paciente/paciente-edit/pacien
     CommonModule,
   ],
   providers: [
-    {
-      provide: MAT_DATE_LOCALE,
-      useValue: 'pt-BR'
-    },
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
   ],
   bootstrap: [AppComponent]
 })

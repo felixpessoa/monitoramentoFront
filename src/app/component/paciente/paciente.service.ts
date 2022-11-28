@@ -26,7 +26,7 @@ export class PacienteService {
     );
   }
 
-  buscarTodos(): Observable<Paciente[]>{;
+  buscarTodos(): Observable<Paciente[]>{
     return this.http.get<Paciente[]>(this.baseUrl).pipe(
           map(obj => obj),
           catchError(e => this.errorHandler(e))
@@ -39,6 +39,14 @@ export class PacienteService {
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
+  }
+
+  update(paciente: Paciente): Observable<Paciente> {
+    const url = `${this.baseUrl}/${paciente.id}`
+    return this.http.put<Paciente>(url, paciente).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    );
   }
 
   errorHandler(e: any): Observable<any> {

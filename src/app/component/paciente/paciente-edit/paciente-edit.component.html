@@ -30,26 +30,25 @@
                 <td>
                     <mat-form-field class="example-full-width">
                         <mat-label>Data de nascimento</mat-label>
-                        <!-- <input matInput [matDatepicker]="date" formControlName="dataNascimento"> -->
-                        <input matInput [matDatepicker]="date" [(ngModel)]="data" formControlName="dataNascimento" [disabled]="true">
-                        <!-- <mat-hint></mat-hint> -->
+                        <input matInput [matDatepicker]="date" formControlName="dataNascimento" [disabled]="true">
                         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
                         <mat-datepicker #date disabled="false"></mat-datepicker>
                     </mat-form-field>
-
                 </td>
             </tr>
         </table>
+       
         <table class="example-full-width" cellspacing="0">
             <tr>
                 <td>
                     <mat-form-field class="example-full-width">
                         <mat-label>Data de Admissão</mat-label>
-                        <input matInput [matDatepicker]="date2" [(ngModel)]="paciente.dataAdmissao" formControlName="dataAdmissao" [disabled]="true">
+                        <input matInput [matDatepicker]="date2" formControlName="dataAdmissao" [disabled]="true">
                         <mat-hint></mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="date2"></mat-datepicker-toggle>
                         <mat-datepicker #date2 disabled="false"></mat-datepicker>
                     </mat-form-field>
+                   
                 </td>
                 <td>
                     <mat-form-field class="example-full-width">
@@ -59,7 +58,7 @@
                 <td>
                     <mat-form-field class="example-full-width">
                         <mat-label>Data da coleta (TESTE COVID-19)</mat-label>
-                        <input matInput [matDatepicker]="date3" [(ngModel)]="paciente.dataDaColetaCovid" formControlName="dataDaColetaCovid" [disabled]="true">
+                        <input matInput [matDatepicker]="date3" formControlName="dataDaColetaCovid" [disabled]="true">
                         <mat-hint></mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="date3"></mat-datepicker-toggle>
                         <mat-datepicker #date3 disabled="false"></mat-datepicker>
@@ -131,7 +130,7 @@
                 <td>
                     <mat-form-field class="example-full-width">
                         <mat-label>Data coleta (TR)</mat-label>
-                        <input matInput [matDatepicker]="date4" [(ngModel)]="paciente.dataColetaTr" formControlName="dataColetaTr" [disabled]="true">
+                        <input matInput [matDatepicker]="date4" formControlName="dataColetaTr" [disabled]="true">
                         <mat-hint></mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="date4"></mat-datepicker-toggle>
                         <mat-datepicker #date4 disabled="false"></mat-datepicker>
@@ -157,13 +156,17 @@
         </table>
     </form>
 
-<!-- 
-    <button mat-raised-button (click)="create()" color="primary">
+    <!-- <button mat-raised-button (click)="testeButon()" color="primary">
+        teste
+    </button> -->
+
+
+    <button mat-raised-button (click)="upDate()" color="primary">
         Salvar
     </button>
 
     <button mat-raised-button (click)="cancel()">
         Cancelar
-    </button> -->
+    </button>
 
 </mat-card>
