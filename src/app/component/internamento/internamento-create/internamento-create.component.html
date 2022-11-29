@@ -1,0 +1,67 @@
+<mat-card>
+
+    <mat-card-title>Novo Internamento</mat-card-title>
+    <form [formGroup]="form">
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Toppings</mat-label>
+                        <mat-select multiple>
+                            <mat-option *ngFor="let topping of setorList" [value]="topping">{{topping}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data de nascimento</mat-label>
+                        <!-- <input matInput [matDatepicker]="date" formControlName="dataNascimento"> -->
+                        <input matInput [matDatepicker]="date" formControlName="dataNascimento" [disabled]="true">
+                        <!-- <mat-hint></mat-hint> -->
+                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                        <mat-datepicker #date disabled="false"></mat-datepicker>
+                    </mat-form-field>
+
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data de Admissão</mat-label>
+                        <input matInput [matDatepicker]="date2" formControlName="dataAdmissao" [disabled]="true">
+                        <mat-hint></mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="date2"></mat-datepicker-toggle>
+                        <mat-datepicker #date2 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Número do Gal" formControlName="numeroDoGal">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data da coleta (TESTE COVID-19)</mat-label>
+                        <input matInput [matDatepicker]="date3" formControlName="dataDaColetaCovid" [disabled]="true">
+                        <mat-hint></mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="date3"></mat-datepicker-toggle>
+                        <mat-datepicker #date3 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+    <button mat-raised-button (click)="create()" color="primary">
+        Salvar
+    </button>
+
+    <button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button>
+
+</mat-card>

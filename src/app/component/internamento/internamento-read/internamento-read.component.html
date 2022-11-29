@@ -5,37 +5,152 @@
 </div>
 
 <div class="container">
-  <table mat-table [dataSource]="dataSource">
-    <!-- Position Column -->
+  <mat-form-field appearance="fill">
+    <mat-label>Toppings</mat-label>
+    <mat-select multiple>
+      <mat-option *ngFor="let topping of setorList" [value]="topping">{{topping}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Registro </th>
+      <th mat-header-cell *matHeaderCellDef>Registro</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef>Pacinete</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dataAdmissao">
+      <th mat-header-cell *matHeaderCellDef>Data de admissão</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.dataAdmissao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="localInternacao">
+      <th mat-header-cell *matHeaderCellDef>Internamento</th>
+      <td mat-cell *matCellDef="let element"> {{element.localInternacao.nome}} </td>
+    </ng-container>
+
+
+
+
+
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="expand row"
+          (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+          <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="example-element-description">
+            <mat-card>
+              <mat-card-title>
+                <p>Registro:{{element.paciente.id}}</p>
+                <p>Nome:{{element.paciente.nome}}</p>
+              </mat-card-title>
+              <mat-card-content>
+                <p>Sexo: {{element.paciente.sexo}}</p>
+                <p>Data de nascimento: {{element.paciente.dataNascimento}}</p>
+                <p>Data de Admissão: {{element.paciente.dataAdmissao}}</p>
+                <p>Número do Gal: {{element.paciente.numeroDoGal}}</p>
+                <p>Data da coleta COVID-19: {{element.paciente.dataDaColetaCovid}}</p>
+                <p>Amostra: {{element.paciente.amostra}}</p>
+                <p>Local de coleta: {{element.paciente.localDeColetaCovid}}</p>
+                <p>MUNICIPIO DE ORIGEM: {{element.paciente.municipioDeOrigem}}</p>
+                <p>STATUS INFLUENZA: {{element.paciente.statusInfluenza}}</p>
+                <p>VACINA: {{element.paciente.vacina}}</p>
+                <p>Comorvidade: {{element.paciente.comorbidade}}</p>
+                <p>TR: {{element.paciente.tr}}</p>
+                <p>DATA COLETA TR: {{element.paciente.dataColetaTr}}</p>
+                <p>LOCAL COLETA TR: {{element.paciente.localColetaTr}}</p>
+                <p>STATUS TR: {{element.paciente.statusTr}}</p>
+              </mat-card-content>
+              <div class="example-element-diagram">
+                <div class="example-element-symbol">STATUS COVID-19: {{element.paciente.statusCovid}} </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+
+
+
+
+
+
+
+    <!-- <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Registro</th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
     
    
-    <!-- <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.nome}} </td>
     </ng-container>
-
-  
-    <ng-container matColumnDef="sexo">
-      <th mat-header-cell *matHeaderCellDef> Sexo </th>
-      <td mat-cell *matCellDef="let element"> {{element.sexo}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="ativo">
-      <th mat-header-cell *matHeaderCellDef> Ativo </th>
-      <td mat-cell *matCellDef="let element"> {{element.ativo}} </td>
-    </ng-container>
-
     
-    <ng-container matColumnDef="dataNascimento">
-      <th mat-header-cell *matHeaderCellDef> Data de nascimento </th>
-      <td mat-cell *matCellDef="let element"> {{element.dataNascimento}} </td>
+    <ng-container matColumnDef="sexo">
+      <th mat-header-cell *matHeaderCellDef>Sexo</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.sexo}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="dataNascimento">
+      <th mat-header-cell *matHeaderCellDef>Data de nascimento</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.dataNascimento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dataAdmissao">
+      <th mat-header-cell *matHeaderCellDef>Data de admissão</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.dataAdmissao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numeroDoGal">
+      <th mat-header-cell *matHeaderCellDef>Número do Gal</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.numeroDoGal}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dataDaColetaCovid">
+      <th mat-header-cell *matHeaderCellDef>Data da Coleta COVID-19</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.dataDaColetaCovid}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amostra">
+      <th mat-header-cell *matHeaderCellDef>Amostra COVID-19</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.amostra}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="localDeColetaCovid">
+      <th mat-header-cell *matHeaderCellDef>Local de coleta COVID-19</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.localDeColetaCovid}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="statusCovid">
+      <th mat-header-cell *matHeaderCellDef>Status COVID-19</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.statusCovid}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="municipioDeOrigem">
+      <th mat-header-cell *matHeaderCellDef>Município de Origem</th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.municipioDeOrigem}} </td>
+    </ng-container> -->
+
+
+
+
+    <!--
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let row">
@@ -53,8 +168,12 @@
             <td mat-cell *matCellDef="let element"> {{element.ativo}} </td>
           </ng-container> -->
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">

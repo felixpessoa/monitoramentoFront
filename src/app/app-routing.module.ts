@@ -1,3 +1,4 @@
+import { InternamentoCreateComponent } from './component/internamento/internamento-create/internamento-create.component';
 import { InternamentoReadComponent } from './component/internamento/internamento-read/internamento-read.component';
 import { PacienteEditComponent } from './component/paciente/paciente-edit/paciente-edit.component';
 import { PacienteCreateComponent } from './component/paciente/paciente-create/paciente-create.component';
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'internamento-read',
     component: InternamentoReadComponent
+  },
+  {
+    path: 'internamento-create',
+    component: InternamentoCreateComponent
   }
 ];
 

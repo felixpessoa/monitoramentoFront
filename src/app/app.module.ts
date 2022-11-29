@@ -30,6 +30,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { PacienteEditComponent } from './component/paciente/paciente-edit/paciente-edit.component';
 import { InternamentoReadComponent } from './component/internamento/internamento-read/internamento-read.component';
+import { InternamentoCreateComponent } from './component/internamento/internamento-create/internamento-create.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { InternamentoReadComponent } from './component/internamento/internamento
     PacienteReadComponent,
     PacienteCreateComponent,
     PacienteEditComponent,
-    InternamentoReadComponent
+    InternamentoReadComponent,
+    InternamentoCreateComponent
   ],
   imports: [
     BrowserModule,
