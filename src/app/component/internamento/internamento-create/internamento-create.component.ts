@@ -1,3 +1,5 @@
+import { SetorService } from './../../setor/setor.service';
+import { Setor } from './../../setor/localInternacao.model';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { InternamentoService } from './../internamento.service';
@@ -15,9 +17,11 @@ export class InternamentoCreateComponent implements OnInit {
 
   form: any = FormGroup;
   internacao: Internacao = {};
-
+  setor: Setor[] = [];
+  
   constructor(
     private service: InternamentoService,
+    private setorService: SetorService,
     private fb: FormBuilder,
     private router: Router,
   ) {
@@ -30,6 +34,7 @@ export class InternamentoCreateComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.buscarSetor();
   }
 
   create() {
@@ -48,6 +53,21 @@ export class InternamentoCreateComponent implements OnInit {
       icon: 'warning',
       title: 'Campos obrigatórios faltando.',
       text: 'Por favor, preencher todos os campos com (*) ou em vermelho!',
+    })
+  }
+
+  cancel() {
+    this.router.navigate(['/internamento-read'])
+  }
+
+  buscarSetor() {
+    this.setorService.buscarTodosSetoresAtivo().subscribe({
+      next: (res) => {
+        this.setor = res;
+      },
+      error: (error) => {
+        console.log(error);
+      }
     })
   }
 

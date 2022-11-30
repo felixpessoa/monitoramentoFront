@@ -94,7 +94,6 @@ export class PacienteCreateComponent implements OnInit {
         this.service.showMessage('Paciente salvo com sucesso!')
         this.router.navigate(['/pacientes-read'])
       })
-
     } else
       Swal.fire({
         icon: 'warning',

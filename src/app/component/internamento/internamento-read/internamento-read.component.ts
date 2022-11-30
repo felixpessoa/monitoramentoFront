@@ -1,3 +1,5 @@
+import { Setor } from './../../setor/localInternacao.model';
+import { SetorService } from './../../setor/setor.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InternamentoService } from './../internamento.service';
@@ -13,8 +15,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrls: ['./internamento-read.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -29,11 +31,13 @@ export class InternamentoReadComponent implements OnInit {
   dataSource = new MatTableDataSource<Internacao>(this.internacao);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   form: any = FormGroup;
+  setor: Setor[] = [];
+  selectedValue: number[] = [];
 
-  setorList: string[] = ['UTI A', 'UTI B'];
 
   constructor(
     private service: InternamentoService,
+    private setorService: SetorService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -62,7 +66,7 @@ export class InternamentoReadComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAll();
-    this.findAllSetor();
+    this.buscarSetor();
   }
 
   findAll() {
@@ -100,8 +104,34 @@ export class InternamentoReadComponent implements OnInit {
     })
   }
 
-  findAllSetor() {
+  buscarSetor() {
+    this.setorService.buscarTodosSetoresAtivo().subscribe({
+      next: (res) => {
+        this.setor = res;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
 
+  internamento() {
+
+    if (this.selectedValue.length != 0) {
+      this.service.bucarPorSetor(this.selectedValue).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.internacao = res;
+          this.dataSource = new MatTableDataSource<Internacao>(this.internacao);
+          this.dataSource.paginator = this.paginator;
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    } else {
+      this.findAll();
+    }
   }
 
   navigateToCreate() {

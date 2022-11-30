@@ -24,7 +24,16 @@ export class InternamentoService {
   }
 
   buscarTodos(): Observable<Internacao[]> {
-    return this.http.get<Internacao[]>(this.baseUrl).pipe(
+    const url = `${this.baseUrl}/ativos`
+    return this.http.get<Internacao[]>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
+
+  bucarPorSetor(ids: number[]): Observable<Internacao[]> {
+    const url = `${this.baseUrl}/setor/${ids}`
+    return this.http.get<Internacao[]>(url).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )

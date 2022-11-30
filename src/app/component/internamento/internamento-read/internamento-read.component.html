@@ -6,9 +6,9 @@
 
 <div class="container">
   <mat-form-field appearance="fill">
-    <mat-label>Toppings</mat-label>
-    <mat-select multiple>
-      <mat-option *ngFor="let topping of setorList" [value]="topping">{{topping}}</mat-option>
+    <mat-label>Local do Internamento</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="id" multiple (ngModelChange)="internamento()">
+      <mat-option *ngFor="let topping of setor" [value]="topping.id">{{topping.nome}}</mat-option>
     </mat-select>
   </mat-form-field>
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
