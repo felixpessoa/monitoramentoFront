@@ -31,6 +31,7 @@ import { CommonModule } from '@angular/common';
 import { PacienteEditComponent } from './component/paciente/paciente-edit/paciente-edit.component';
 import { InternamentoReadComponent } from './component/internamento/internamento-read/internamento-read.component';
 import { InternamentoCreateComponent } from './component/internamento/internamento-create/internamento-create.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -66,9 +67,10 @@ import { InternamentoCreateComponent } from './component/internamento/internamen
     FormsModule,
     MatNativeDateModule,
     CommonModule,
+    MatAutocompleteModule,
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
   ],
   bootstrap: [AppComponent]
 })

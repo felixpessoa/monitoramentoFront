@@ -1,3 +1,5 @@
+import { Paciente } from './../../paciente/paciente.model';
+import { PacienteService } from './../../paciente/paciente.service';
 import { SetorService } from './../../setor/setor.service';
 import { Setor } from './../../setor/localInternacao.model';
 import Swal from 'sweetalert2';
@@ -18,10 +20,13 @@ export class InternamentoCreateComponent implements OnInit {
   form: any = FormGroup;
   internacao: Internacao = {};
   setor: Setor[] = [];
+  pacientes: Paciente[] = [];
+  selectedValue: any;
   
   constructor(
     private service: InternamentoService,
     private setorService: SetorService,
+    private pacienteService: PacienteService,
     private fb: FormBuilder,
     private router: Router,
   ) {
@@ -29,7 +34,7 @@ export class InternamentoCreateComponent implements OnInit {
       localInternacao: ['', Validators.required],
       inicio: [],
       fim: [],
-      paciente: ['', Validators.required],
+      paciente: [this.selectedValue, Validators.required],
     })
    }
 
@@ -38,22 +43,23 @@ export class InternamentoCreateComponent implements OnInit {
   }
 
   create() {
-    if(this.form.valid) {
-      this.internacao.localInternacao = this.form.value.localInternacao;
-      this.internacao.inicio = this.form.value.inicio == null ? this.form.value.inicio : moment.utc(this.form.value.inicio).format('HH:mm DD/MM/YYYY')
-      this.internacao.fim = this.form.value.fim == null ? this.form.value.fim : moment.utc(this.form.value.fim).format('HH:mm DD/MM/YYYY')
-      this.internacao.paciente = this.form.value.paciente;
+    console.log(this.form.value.paciente)
+    // if(this.form.valid) {
+    //   this.internacao.localInternacao = this.form.value.localInternacao;
+    //   this.internacao.inicio = this.form.value.inicio == null ? this.form.value.inicio : moment.utc(this.form.value.inicio).format('HH:mm DD/MM/YYYY')
+    //   this.internacao.fim = this.form.value.fim == null ? this.form.value.fim : moment.utc(this.form.value.fim).format('HH:mm DD/MM/YYYY')
+    //   this.internacao.paciente = this.form.value.paciente;
 
-      this.service.create(this.internacao).subscribe(() => {
-        this.service.showMessage('Internamento salvo com sucesso!')
-        this.router.navigate(['/internamento-read'])
-      })
-    }else
-    Swal.fire({
-      icon: 'warning',
-      title: 'Campos obrigatórios faltando.',
-      text: 'Por favor, preencher todos os campos com (*) ou em vermelho!',
-    })
+    //   this.service.create(this.internacao).subscribe(() => {
+    //     this.service.showMessage('Internamento salvo com sucesso!')
+    //     this.router.navigate(['/internamento-read'])
+    //   })
+    // }else
+    // Swal.fire({
+    //   icon: 'warning',
+    //   title: 'Campos obrigatórios faltando.',
+    //   text: 'Por favor, preencher todos os campos com (*) ou em vermelho!',
+    // })
   }
 
   cancel() {
@@ -64,6 +70,20 @@ export class InternamentoCreateComponent implements OnInit {
     this.setorService.buscarTodosSetoresAtivo().subscribe({
       next: (res) => {
         this.setor = res;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  buscarPaciente(nome: any) {
+
+    this.pacienteService.findByIdName(nome).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.pacientes = res;
+
       },
       error: (error) => {
         console.log(error);
