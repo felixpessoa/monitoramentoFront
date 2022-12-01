@@ -38,11 +38,11 @@
             <tr>
                 <td>
                     <mat-form-field class="example-full-width">
-                        <mat-label>State</mat-label>
+                        <mat-label>Paciente</mat-label>
                         <input matInput [matAutocomplete]="auto" [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" (ngModelChange)="buscarPaciente($event)">
                         <!-- <input matInput placeholder="Paciente" [(ngModel)]="selectedValue" (ngModelChange)="buscarPaciente($event)" formControlName="paciente"> -->
                         <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let state of pacientes" [value]="state.id">
+                            <mat-option *ngFor="let state of pacientes" [value]="state.nome">
                               <span>Registro: {{state.id}}</span> |
                               <small>Nome: {{state.nome}}</small> |
                               <small>Data De nascimento: {{state.dataNascimento}}</small>

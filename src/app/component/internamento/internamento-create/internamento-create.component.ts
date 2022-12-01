@@ -21,8 +21,9 @@ export class InternamentoCreateComponent implements OnInit {
   internacao: Internacao = {};
   setor: Setor[] = [];
   pacientes: Paciente[] = [];
+  paciente: Paciente = {};
   selectedValue: any;
-  
+
   constructor(
     private service: InternamentoService,
     private setorService: SetorService,
@@ -36,30 +37,31 @@ export class InternamentoCreateComponent implements OnInit {
       fim: [],
       paciente: [this.selectedValue, Validators.required],
     })
-   }
+  }
 
   ngOnInit(): void {
     this.buscarSetor();
   }
 
   create() {
-    console.log(this.form.value.paciente)
-    // if(this.form.valid) {
-    //   this.internacao.localInternacao = this.form.value.localInternacao;
-    //   this.internacao.inicio = this.form.value.inicio == null ? this.form.value.inicio : moment.utc(this.form.value.inicio).format('HH:mm DD/MM/YYYY')
-    //   this.internacao.fim = this.form.value.fim == null ? this.form.value.fim : moment.utc(this.form.value.fim).format('HH:mm DD/MM/YYYY')
-    //   this.internacao.paciente = this.form.value.paciente;
+    if(this.form.valid) {
 
-    //   this.service.create(this.internacao).subscribe(() => {
-    //     this.service.showMessage('Internamento salvo com sucesso!')
-    //     this.router.navigate(['/internamento-read'])
-    //   })
-    // }else
-    // Swal.fire({
-    //   icon: 'warning',
-    //   title: 'Campos obrigatórios faltando.',
-    //   text: 'Por favor, preencher todos os campos com (*) ou em vermelho!',
-    // })
+      this.internacao.localInternacao = this.form.value.localInternacao;
+      this.internacao.inicio = this.form.value.inicio == null ? this.form.value.inicio : moment.utc(this.form.value.inicio).format('DD/MM/YYYY')
+      this.internacao.fim = this.form.value.fim == null ? this.form.value.fim : moment.utc(this.form.value.fim).format('DD/MM/YYYY')
+      this.internacao.paciente = this.form.value.paciente;
+
+      this.service.create(this.internacao).subscribe(() => {
+        this.service.showMessage('Internamento salvo com sucesso!')
+        this.router.navigate(['/internamento-read'])
+      })
+      
+    }else
+    Swal.fire({
+      icon: 'warning',
+      title: 'Campos obrigatórios faltando.',
+      text: 'Por favor, preencher todos os campos com (*) ou em vermelho!',
+    })
   }
 
   cancel() {
@@ -82,8 +84,11 @@ export class InternamentoCreateComponent implements OnInit {
     this.pacienteService.findByIdName(nome).subscribe({
       next: (res) => {
         console.log(res);
-        this.pacientes = res;
-
+        this.pacientes = res
+        this.paciente = res[0];
+        this.form.patchValue({
+          paciente: this.paciente.id,
+        })
       },
       error: (error) => {
         console.log(error);
