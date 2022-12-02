@@ -1,3 +1,4 @@
+import { AltaCreateComponent } from './component/alta/alta-create/alta-create.component';
 import { InternamentoCreateComponent } from './component/internamento/internamento-create/internamento-create.component';
 import { InternamentoReadComponent } from './component/internamento/internamento-read/internamento-read.component';
 import { PacienteEditComponent } from './component/paciente/paciente-edit/paciente-edit.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'internamento-create',
     component: InternamentoCreateComponent
+  },
+  {
+    path: 'alta-create',
+    component: AltaCreateComponent
   }
 ];
 

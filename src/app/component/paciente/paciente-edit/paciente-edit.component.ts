@@ -28,7 +28,7 @@ export class PacienteEditComponent implements OnInit {
       nome: ['', Validators.required],
       sexo: ['', Validators.required],
       dataNascimento: [],
-      dataAdmissao: [],
+      // dataAdmissao: [],
       numeroDoGal: [],
       dataDaColetaCovid: [],
       amostra: [],
@@ -56,7 +56,7 @@ export class PacienteEditComponent implements OnInit {
         nome: data.nome,
         sexo: data.sexo,
         dataNascimento: data.dataNascimento == null ? null : this.toDate(data.dataNascimento!),
-        dataAdmissao: data.dataAdmissao == null ? null : this.toDate(data.dataAdmissao!),
+        // dataAdmissao: data.dataAdmissao == null ? null : this.toDate(data.dataAdmissao!),
         numeroDoGal: data.numeroDoGal,
         dataDaColetaCovid: data.dataDaColetaCovid == null ? null : this.toDate(data.dataDaColetaCovid!),
         amostra: data.amostra,
@@ -110,7 +110,7 @@ export class PacienteEditComponent implements OnInit {
       this.paciente.nome = this.form.value.nome;
       this.paciente.sexo = this.form.value.sexo;
       this.paciente.dataNascimento = this.form.value.dataNascimento == null ? this.form.value.dataNascimento : moment.utc(this.form.value.dataNascimento).format('DD/MM/YYYY')
-      this.paciente.dataAdmissao = this.form.value.dataAdmissao == null ? this.form.value.dataAdmissao : moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
+      // this.paciente.dataAdmissao = this.form.value.dataAdmissao == null ? this.form.value.dataAdmissao : moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
       this.paciente.numeroDoGal = this.form.value.numeroDoGal;
       this.paciente.dataDaColetaCovid = this.form.value.dataDaColetaCovid == null ? this.form.value.dataDaColetaCovid : moment.utc(this.form.value.dataDaColetaCovid).format('DD/MM/YYYY')
       this.paciente.amostra = this.form.value.amostra;

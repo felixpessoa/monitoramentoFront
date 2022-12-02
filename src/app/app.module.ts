@@ -32,6 +32,11 @@ import { PacienteEditComponent } from './component/paciente/paciente-edit/pacien
 import { InternamentoReadComponent } from './component/internamento/internamento-read/internamento-read.component';
 import { InternamentoCreateComponent } from './component/internamento/internamento-create/internamento-create.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { InternamentoEditComponent } from './component/internamento/internamento-edit/internamento-edit.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { AltaCreateComponent } from './component/alta/alta-create/alta-create.component';
 
 
 @NgModule({
@@ -43,7 +48,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     PacienteCreateComponent,
     PacienteEditComponent,
     InternamentoReadComponent,
-    InternamentoCreateComponent
+    InternamentoCreateComponent,
+    InternamentoEditComponent,
+    AltaCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +75,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatNativeDateModule,
     CommonModule,
     MatAutocompleteModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

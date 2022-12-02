@@ -1,0 +1,73 @@
+<mat-card>
+
+    <mat-card-title>Criar Alta</mat-card-title>
+    <form [formGroup]="form">
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data da Alta</mat-label>
+                        <input matInput [matDatepicker]="date" formControlName="dataAlta" [disabled]="true">
+                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                        <mat-datepicker #date disabled="false"></mat-datepicker>
+                    </mat-form-field> 
+
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Paciente</mat-label>
+                        <input matInput [matAutocomplete]="auto" [(ngModel)]="selectedValue.nome"
+                            [ngModelOptions]="{standalone: true}" (ngModelChange)="buscarPaciente($event)">
+                        <!-- <input matInput placeholder="Paciente" [(ngModel)]="selectedValue" (ngModelChange)="buscarPaciente($event)" formControlName="paciente"> -->
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let state of pacientes" [value]="state.nome">
+                                <span>Registro: {{state.id}}</span> |
+                                <small>Nome: {{state.nome}}</small> |
+                                <small>Data De nascimento: {{state.dataNascimento}}</small>
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Tipo de alta</mat-label>
+                        <input matInput formControlName="tipoDeAlta">
+
+                    </mat-form-field> 
+
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <button mat-raised-button color="primary" (click)="create()">
+        Salvar
+    </button>
+    <!-- <button mat-raised-button (click)="upDate()" color="primary">
+        Salvar
+    </button> -->
+
+    <button mat-raised-button (click)="cancel()" color="primary">
+        Cancelar
+    </button>
+
+    <!-- <button class="alta" mat-raised-button (click)="alta()">
+        <i class="material-icons">
+            contact_emergency
+        </i>
+        ALTA
+    </button>
+    <button class="obito" mat-raised-button (click)="dialogRef.close(false)">
+        <i class="material-icons">
+            co_present
+        </i>
+        ÓBITO
+    </button> -->
+
+
+</mat-card>

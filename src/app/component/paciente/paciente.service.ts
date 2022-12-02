@@ -43,10 +43,11 @@ export class PacienteService {
 
   findByIdName(nome: string): Observable<Paciente[]> {
     const url = `${this.baseUrl}/nome/${nome}`
-    return this.http.get<Paciente[]>(url).pipe(
-      map(obj => obj),
-      catchError(e => this.errorHandler(e))
-    )
+    return this.http.get<Paciente[]>(url)
+    // .pipe(
+    //   map(obj => obj),
+    //   catchError(e => this.errorHandler(e))
+    // )
   }
 
   update(paciente: Paciente): Observable<Paciente> {

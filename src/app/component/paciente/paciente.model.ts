@@ -3,7 +3,7 @@ export interface Paciente {
     nome?: string;
     sexo?: string;
     dataNascimento?: string;
-    dataAdmissao?: string;
+    // dataAdmissao?: string;
     numeroDoGal?: string;
     dataDaColetaCovid?:string;
     amostra?: string;

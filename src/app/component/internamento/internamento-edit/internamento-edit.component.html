@@ -1,0 +1,91 @@
+<mat-card>
+
+    <mat-card-title>Editar Internamento</mat-card-title>
+    <form [formGroup]="form">
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Mudar Setor</mat-label>
+                        <mat-select formControlName="localInternacao">
+                            <mat-option [value]=""></mat-option>
+                            <mat-option *ngFor="let topping of setor" [value]="topping.id">{{topping.nome}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </td>
+            </tr>
+        </table>
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data de inicio</mat-label>
+                        <!-- <input matInput [matDatepicker]="date" formControlName="dataNascimento"> -->
+                        <input matInput [matDatepicker]="date" formControlName="inicio" [disabled]="true">
+                        <!-- <mat-hint></mat-hint> -->
+                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                        <mat-datepicker #date disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data da alta</mat-label>
+                        <input matInput [matDatepicker]="date2" formControlName="fim" [disabled]="true">
+                        <mat-hint></mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="date2"></mat-datepicker-toggle>
+                        <mat-datepicker #date2 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Paciente</mat-label>
+                        <input matInput [matAutocomplete]="auto" [(ngModel)]="selectedValue.nome"
+                            [ngModelOptions]="{standalone: true}" (ngModelChange)="buscarPaciente($event)">
+                        <!-- <input matInput placeholder="Paciente" [(ngModel)]="selectedValue" (ngModelChange)="buscarPaciente($event)" formControlName="paciente"> -->
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let state of pacientes" [value]="state.nome">
+                                <span>Registro: {{state.id}}</span> |
+                                <small>Nome: {{state.nome}}</small> |
+                                <small>Data De nascimento: {{state.dataNascimento}}</small>
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <!-- <button mat-raised-button color="primary" (click)="submit()">
+        Salvar
+    </button> -->
+    <button mat-raised-button (click)="upDate()" color="primary">
+        Salvar
+    </button>
+
+    <button mat-raised-button (click)="dialogRef.close(false)" color="primary">
+        Cancelar
+    </button>
+
+    <button class="alta" mat-raised-button (click)="alta()">
+        <i class="material-icons">
+            contact_emergency
+        </i>
+        ALTA
+    </button>
+    <button class="obito" mat-raised-button (click)="dialogRef.close(false)">
+        <i class="material-icons">
+            co_present
+        </i>
+        ÓBITO
+    </button>
+
+
+</mat-card>

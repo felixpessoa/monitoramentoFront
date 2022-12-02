@@ -32,7 +32,7 @@ export class PacienteCreateComponent implements OnInit {
       nome: ['', Validators.required],
       sexo: ['', Validators.required],
       dataNascimento: [],
-      dataAdmissao: [],
+      // dataAdmissao: [],
       numeroDoGal: [],
       dataDaColetaCovid: [],
       amostra: [],
@@ -53,15 +53,15 @@ export class PacienteCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  teste() {
-    this.paciente.dataNascimento = moment.utc(this.form.value.dataNascimento).format('DD/MM/YYYY')
-    this.paciente.dataAdmissao = moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
-    this.paciente.dataDaColetaCovid = moment.utc(this.form.value.dataDaColetaCovid).format('DD/MM/YYYY')
-    this.paciente.dataColetaTr = moment.utc(this.form.value.dataColetaTr).format('DD/MM/YYYY')
-    console.log("teste pact " + this.paciente.dataNascimento)
-    console.log("teste form " + this.form.value.dataNascimento)
+  // teste() {
+  //   this.paciente.dataNascimento = moment.utc(this.form.value.dataNascimento).format('DD/MM/YYYY')
+  //   this.paciente.dataAdmissao = moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
+  //   this.paciente.dataDaColetaCovid = moment.utc(this.form.value.dataDaColetaCovid).format('DD/MM/YYYY')
+  //   this.paciente.dataColetaTr = moment.utc(this.form.value.dataColetaTr).format('DD/MM/YYYY')
+  //   console.log("teste pact " + this.paciente.dataNascimento)
+  //   console.log("teste form " + this.form.value.dataNascimento)
 
-  }
+  // }
 
   create() {
     if (this.form.valid) {
@@ -70,7 +70,7 @@ export class PacienteCreateComponent implements OnInit {
       this.paciente.nome = this.form.value.nome;
       this.paciente.sexo = this.form.value.sexo;
       this.paciente.dataNascimento = this.form.value.dataNascimento == null ? this.form.value.dataNascimento : moment.utc(this.form.value.dataNascimento).format('DD/MM/YYYY')
-      this.paciente.dataAdmissao = this.form.value.dataAdmissao == null ? this.form.value.dataAdmissao : moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
+      // this.paciente.dataAdmissao = this.form.value.dataAdmissao == null ? this.form.value.dataAdmissao : moment.utc(this.form.value.dataAdmissao).format('DD/MM/YYYY')
       this.paciente.numeroDoGal = this.form.value.numeroDoGal;
       this.paciente.dataDaColetaCovid = this.form.value.dataDaColetaCovid == null ? this.form.value.dataDaColetaCovid : moment.utc(this.form.value.dataDaColetaCovid).format('DD/MM/YYYY')
       this.paciente.amostra = this.form.value.amostra;

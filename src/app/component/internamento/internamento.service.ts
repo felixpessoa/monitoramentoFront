@@ -62,7 +62,7 @@ export class InternamentoService {
     return EMPTY
   }
 
-  showMessage(msg: string, isError: boolean = false): void {
+  showMessage(msg: string, isError: boolean = false) {
     if (isError) {
       Swal.fire({
         icon: 'error',

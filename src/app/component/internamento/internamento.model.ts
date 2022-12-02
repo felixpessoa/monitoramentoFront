@@ -4,4 +4,5 @@ export interface Internacao {
     inicio?: string;
     fim?: string;
     paciente?: number;
+    ativo?: boolean;
 }

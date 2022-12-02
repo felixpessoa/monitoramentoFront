@@ -1,3 +1,4 @@
+import { InternamentoEditComponent } from './../internamento-edit/internamento-edit.component';
 import { Setor } from './../../setor/localInternacao.model';
 import { SetorService } from './../../setor/setor.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -8,6 +9,7 @@ import { Internacao } from './../internamento.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-internamento-read',
@@ -25,7 +27,7 @@ export class InternamentoReadComponent implements OnInit {
 
   internacao: Internacao[] = [];
   // columnsToDisplay : string[] = ['id', 'nome', 'sexo', 'dataNascimento', 'dataAdmissao', 'numeroDoGal', 'dataDaColetaCovid', 'amostra', 'localDeColetaCovid', 'statusCovid', 'municipioDeOrigem'];
-  columnsToDisplay = ['id', 'nome', 'dataAdmissao', 'localInternacao'];
+  columnsToDisplay = ['id', 'nome', 'dataAdmissao', 'localInternacao', 'action'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement?: Internacao | null;
   dataSource = new MatTableDataSource<Internacao>(this.internacao);
@@ -34,12 +36,16 @@ export class InternamentoReadComponent implements OnInit {
   setor: Setor[] = [];
   selectedValue: number[] = [];
 
+  dataFromDialog : any;
+  dialogId!: number;
+
 
   constructor(
     private service: InternamentoService,
     private setorService: SetorService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     this.form = this.fb.group({
       idInternacao: [],
@@ -132,6 +138,20 @@ export class InternamentoReadComponent implements OnInit {
     } else {
       this.findAll();
     }
+  }
+
+  showPrompt(id: number): void {
+    this.dialogId = id;
+    const dialogRef = this.dialog.open(InternamentoEditComponent,
+      { width: '1500px',
+       height: '400px',
+       data: {dialogoId: this.dialogId} 
+      });
+
+    dialogRef.afterClosed()
+    .subscribe((shouldReload: boolean) => {
+      if (shouldReload) window.location.reload()
+    });
   }
 
   navigateToCreate() {

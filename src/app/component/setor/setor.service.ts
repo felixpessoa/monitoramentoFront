@@ -17,6 +17,14 @@ export class SetorService {
   ) { }
 
 
+findById(id: number): Observable<Setor> {
+    const url = `${this.baseUrl}/${id}`
+    return this.http.get<Setor>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
+
   buscarTodosSetoresAtivo(): Observable<Setor[]> {
     const url =  `${this.baseUrl}/ativos`
     return this.http.get<Setor[]>(url).pipe(
