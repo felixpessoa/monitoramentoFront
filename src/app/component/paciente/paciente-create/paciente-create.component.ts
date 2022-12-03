@@ -104,7 +104,7 @@ export class PacienteCreateComponent implements OnInit {
   }
 
   cancel() {
-
+    this.router.navigate(['/pacientes-read'])
   }
 
   postar() {

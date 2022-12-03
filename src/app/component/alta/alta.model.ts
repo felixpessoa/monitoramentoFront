@@ -1,5 +1,5 @@
 export interface Alta {
     dataAlta?: string;
-    tipo?: string;
+    tipoDeAlta?: string;
     paciente?: number;
 }

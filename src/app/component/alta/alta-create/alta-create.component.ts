@@ -1,11 +1,15 @@
+import Swal from 'sweetalert2';
+import { AltaService } from './../alta.service';
+import { Alta } from './../alta.model';
 import { PacienteService } from './../../paciente/paciente.service';
 import { Paciente } from './../../paciente/paciente.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InternamentoEditComponent } from './../../internamento/internamento-edit/internamento-edit.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { map } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-alta-create',
@@ -19,16 +23,18 @@ export class AltaCreateComponent implements OnInit {
   pacientes: Paciente[] = [];
   paciente: Paciente = {};
   selectedValue: any = {};
+  alta: Alta = {};
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private pacienteService: PacienteService,
+    private service: AltaService,
   ) {
     this.form = this.fb.group({
-      dataAlta: [],
-      tipoDeAlta: [],
-      paciente: [],
+      dataAlta: ['', Validators.required],
+      tipoDeAlta: ['', Validators.required],
+      paciente: ['', Validators.required],
     })
    }
 
@@ -42,7 +48,9 @@ export class AltaCreateComponent implements OnInit {
       this.pacienteService.findById(this.pacienteId).subscribe({
         next: (res) => {
           this.selectedValue = res;
-          console.log(this.paciente)
+          this.form.patchValue({
+            paciente: this.selectedValue.id,
+          })
         }
       })
     }
@@ -65,7 +73,22 @@ export class AltaCreateComponent implements OnInit {
   }
 
   create() {
+    if (this.form.valid) {
+      this.alta.dataAlta = this.form.value.dataAlta == null ? this.form.value.dataAlta : moment.utc(this.form.value.dataAlta).format('DD/MM/YYYY');
+      this.alta.tipoDeAlta = this.form.value.tipoDeAlta;
+      this.alta.paciente = this.form.value.paciente;
 
+      this.service.create(this.alta).subscribe(() => {
+        this.service.showMessage('Alta salva com sucesso!')
+        this.router.navigate(['/alta-read'])
+      })
+    }else{
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos obrigatórios faltando.',
+        text: 'Por favor, preencher todos os campos com (*) ou em vermelho!',
+      })
+    }
   }
 
   cancel(): void {

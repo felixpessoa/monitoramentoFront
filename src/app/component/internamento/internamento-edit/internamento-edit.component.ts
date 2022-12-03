@@ -118,9 +118,10 @@ export class InternamentoEditComponent implements OnInit {
     this.service.update(this.internacao).subscribe( () =>{
       this.service.showMessage('Internamento atualizado.') 
     });
-      
-    this.router.navigateByUrl('/internamento-read');
+    this.router.navigate(['/internamento-read'])
+    // this.router.navigateByUrl('/internamento-read');
     this.dialogRef.close()
+    location.reload();
   }
 
   onNoClick(): void {

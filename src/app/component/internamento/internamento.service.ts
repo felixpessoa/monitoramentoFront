@@ -57,8 +57,8 @@ export class InternamentoService {
 
 
   errorHandler(e: any): Observable<any> {
-    console.log(e);
-    this.showMessage("Ocorreu um erro!", true);
+    console.log(e.error.message);
+    this.showMessage(e.error.message, true);
     return EMPTY
   }
 

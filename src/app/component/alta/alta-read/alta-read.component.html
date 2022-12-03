@@ -1,0 +1,86 @@
+<div class="create">
+    <h1>Altas</h1>
+    <button (click)="navigateToCreate()" class="mat-elevation-z8" mat-stroked-button color="accent">CADASTRAR NOVA
+        ALTA</button>
+</div>
+
+<div class="container">
+    <!-- <mat-form-field appearance="fill">
+        <mat-label>Local do Internamento</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="id" multiple (ngModelChange)="internamento()">
+          <mat-option *ngFor="let topping of setor" [value]="topping.id">{{topping.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Registro </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Paciente </th>
+            <td mat-cell *matCellDef="let element"> {{element.paciente.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataDaColetaCovid">
+            <th mat-header-cell *matHeaderCellDef> Data da coleta COVID-19 </th>
+            <td mat-cell *matCellDef="let element"> {{element.paciente.dataDaColetaCovid}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="statusCovid">
+            <th mat-header-cell *matHeaderCellDef> Status COVID-19 </th>
+            <td mat-cell *matCellDef="let element"> {{element.paciente.statusCovid}} </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Ações</th>
+            <td mat-cell *matCellDef="let row">
+                <a routerLink="/paciente-edit/{{row.id}}" class="edit">
+                    <i class="material-icons">
+                        account_box
+                    </i>
+                </a>
+
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expand">
+            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button aria-label="expand row"
+                    (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+                    <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+                    <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <div class="example-element-description">
+                        <mat-card>
+                            <div class="example-element-diagram">
+                                <div class="example-element-symbol">Tipo de Alta: {{element.tipoDeAlta}} </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+</div>

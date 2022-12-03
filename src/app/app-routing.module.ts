@@ -1,3 +1,4 @@
+import { AltaReadComponent } from './component/alta/alta-read/alta-read.component';
 import { AltaCreateComponent } from './component/alta/alta-create/alta-create.component';
 import { InternamentoCreateComponent } from './component/internamento/internamento-create/internamento-create.component';
 import { InternamentoReadComponent } from './component/internamento/internamento-read/internamento-read.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'alta-create',
     component: AltaCreateComponent
+  },
+  {
+    path: 'alta-read',
+    component: AltaReadComponent
   }
 ];
 

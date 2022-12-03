@@ -37,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { AltaCreateComponent } from './component/alta/alta-create/alta-create.component';
+import { AltaReadComponent } from './component/alta/alta-read/alta-read.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AltaCreateComponent } from './component/alta/alta-create/alta-create.co
     InternamentoReadComponent,
     InternamentoCreateComponent,
     InternamentoEditComponent,
-    AltaCreateComponent
+    AltaCreateComponent,
+    AltaReadComponent
   ],
   imports: [
     BrowserModule,
