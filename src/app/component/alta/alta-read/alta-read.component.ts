@@ -1,3 +1,4 @@
+import { AltaEditComponent } from './../alta-edit/alta-edit.component';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -56,6 +57,20 @@ export class AltaReadComponent implements OnInit {
 
   navigateToCreate(){
     this.router.navigate(['alta-create']);
+  }
+
+  showPrompt(id: number): void {
+    this.dialogId = id;
+    const dialogRef = this.dialog.open(AltaEditComponent,
+      { width: '1500px',
+       height: '400px',
+       data: {dialogoId: this.dialogId} 
+      });
+
+    dialogRef.afterClosed()
+    .subscribe((shouldReload: boolean) => {
+      if (shouldReload) window.location.reload()
+    });
   }
 
 }

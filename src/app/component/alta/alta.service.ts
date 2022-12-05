@@ -31,7 +31,21 @@ export class AltaService {
     )
   }
 
+  findById(id: number): Observable<Alta>{
+    const url = `${this.baseUrl}/${id}`
+    return this.http.get<Alta>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
 
+  update(alta: Alta): Observable<Alta>{
+    const url = `${this.baseUrl}/${alta.id}`
+    return this.http.put<Alta>(url, alta).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    );
+  }
 
   errorHandler(e: any): Observable<any> {
     console.log(e);

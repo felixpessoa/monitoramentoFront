@@ -38,6 +38,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { AltaCreateComponent } from './component/alta/alta-create/alta-create.component';
 import { AltaReadComponent } from './component/alta/alta-read/alta-read.component';
+import { AltaEditComponent } from './component/alta/alta-edit/alta-edit.component';
+import { ObitoCreateComponent } from './component/obito/obito-create/obito-create.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { AltaReadComponent } from './component/alta/alta-read/alta-read.componen
     InternamentoCreateComponent,
     InternamentoEditComponent,
     AltaCreateComponent,
-    AltaReadComponent
+    AltaReadComponent,
+    AltaEditComponent,
+    ObitoCreateComponent
   ],
   imports: [
     BrowserModule,
