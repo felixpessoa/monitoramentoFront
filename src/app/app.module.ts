@@ -40,6 +40,8 @@ import { AltaCreateComponent } from './component/alta/alta-create/alta-create.co
 import { AltaReadComponent } from './component/alta/alta-read/alta-read.component';
 import { AltaEditComponent } from './component/alta/alta-edit/alta-edit.component';
 import { ObitoCreateComponent } from './component/obito/obito-create/obito-create.component';
+import { ObitoReadComponent } from './component/obito/obito-read/obito-read.component';
+import { ObitoEditComponent } from './component/obito/obito-edit/obito-edit.component';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { ObitoCreateComponent } from './component/obito/obito-create/obito-creat
     AltaCreateComponent,
     AltaReadComponent,
     AltaEditComponent,
-    ObitoCreateComponent
+    ObitoCreateComponent,
+    ObitoReadComponent,
+    ObitoEditComponent
   ],
   imports: [
     BrowserModule,

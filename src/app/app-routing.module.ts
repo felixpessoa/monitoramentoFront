@@ -1,3 +1,5 @@
+import { ObitoEditComponent } from './component/obito/obito-edit/obito-edit.component';
+import { ObitoReadComponent } from './component/obito/obito-read/obito-read.component';
 import { ObitoCreateComponent } from './component/obito/obito-create/obito-create.component';
 import { AltaEditComponent } from './component/alta/alta-edit/alta-edit.component';
 import { AltaReadComponent } from './component/alta/alta-read/alta-read.component';
@@ -46,6 +48,14 @@ const routes: Routes = [
   {
     path: 'obito-create',
     component: ObitoCreateComponent
+  },
+  {
+    path: 'obito-read',
+    component: ObitoReadComponent
+  },
+  {
+    path: 'obito-edit/:id',
+    component: ObitoEditComponent
   }
 ];
 

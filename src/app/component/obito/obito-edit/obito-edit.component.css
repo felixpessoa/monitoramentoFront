@@ -24,3 +24,11 @@ mat-form-field {
 td {
     padding-right: 8px;
 }
+
+.alta {
+    background: green;
+}
+
+.obito {
+    background: red;
+}

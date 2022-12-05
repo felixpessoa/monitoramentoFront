@@ -104,7 +104,7 @@ export class AltaEditComponent implements OnInit {
     // this.router.navigate(['/alta-read'])
    
     this.dialogRef.close()
-    // location.reload();
+    location.reload();
 
   }else{
     Swal.fire({

@@ -147,4 +147,12 @@ export class InternamentoEditComponent implements OnInit {
     this.dialogRef.close()
   }
 
+  obito() {
+    this.router.navigateByUrl('/obito-create',
+    {state: {passiente: this.selectedValue.id}}
+    );
+    this.dialogRef.close()
+  }
+
+
 }

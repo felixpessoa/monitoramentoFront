@@ -84,7 +84,7 @@ export class PacienteCreateComponent implements OnInit {
       this.paciente.dataColetaTr = this.form.value.dataColetaTr == null ? this.form.value.dataColetaTr : moment.utc(this.form.value.dataColetaTr).format('DD/MM/YYYY')
       this.paciente.localColetaTr = this.form.value.localColetaTr;
       this.paciente.statusTr = this.form.value.statusTr;
-      this.paciente.ativo = this.form.value.ativo == undefined ? null : this.form.value.ativo;
+      this.paciente.ativo = this.form.value.ativo == undefined ? true : this.form.value.ativo;
 
       console.log(this.paciente);
       // console.log(this.form.value);
