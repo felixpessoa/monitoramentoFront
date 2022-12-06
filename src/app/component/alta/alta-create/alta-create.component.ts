@@ -92,7 +92,7 @@ export class AltaCreateComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/internamento-read'])
+    this.router.navigate(['/alta-read'])
   }
 
 }

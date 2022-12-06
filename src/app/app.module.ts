@@ -42,6 +42,10 @@ import { AltaEditComponent } from './component/alta/alta-edit/alta-edit.componen
 import { ObitoCreateComponent } from './component/obito/obito-create/obito-create.component';
 import { ObitoReadComponent } from './component/obito/obito-read/obito-read.component';
 import { ObitoEditComponent } from './component/obito/obito-edit/obito-edit.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { LayoutModule } from '@angular/cdk/layout';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -60,7 +64,8 @@ import { ObitoEditComponent } from './component/obito/obito-edit/obito-edit.comp
     AltaEditComponent,
     ObitoCreateComponent,
     ObitoReadComponent,
-    ObitoEditComponent
+    ObitoEditComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +92,10 @@ import { ObitoEditComponent } from './component/obito/obito-edit/obito-edit.comp
     MatAutocompleteModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatGridListModule,
+    MatMenuModule,
+    LayoutModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

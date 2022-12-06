@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // url: 'http://localhost:8090/api/'
-  url: 'http://10.0.3.21:8090/api/'
+  url: 'http://localhost:8090/api/'
+  // url: 'http://10.0.3.21:8090/api/'
 };
 
 /*
