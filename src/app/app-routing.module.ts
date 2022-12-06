@@ -1,4 +1,4 @@
-import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { DashboardComponent } from './component/dashboard/dashboard/dashboard.component';
 import { ObitoEditComponent } from './component/obito/obito-edit/obito-edit.component';
 import { ObitoReadComponent } from './component/obito/obito-read/obito-read.component';
 import { ObitoCreateComponent } from './component/obito/obito-create/obito-create.component';
@@ -14,10 +14,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-    {
-      path: '',
-      component: DashboardComponent
-    },
+  {
+    path: '',
+    component: DashboardComponent
+  },
   {
     path: 'pacientes-read',
     component: PacienteReadComponent

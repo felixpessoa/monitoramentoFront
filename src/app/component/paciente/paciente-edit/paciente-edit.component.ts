@@ -16,7 +16,7 @@ export class PacienteEditComponent implements OnInit {
 
   form: any = FormGroup;
   paciente: Paciente = {};
- 
+
   constructor(
     private fb: FormBuilder,
     private service: PacienteService,
@@ -73,11 +73,6 @@ export class PacienteEditComponent implements OnInit {
         dataCadastro: data.dataCadastro == null ? null : this.toDate(data.dataCadastro!)
       })
     });
-
-
-
-
-
   }
 
   toDate(dateStr: string) {
@@ -130,10 +125,11 @@ export class PacienteEditComponent implements OnInit {
       this.service.update(this.paciente).subscribe(
         event => {
           this.service.showMessage('Paciente atualizado.')
-          this.router.navigate(['/pacientes-read'])}
-     )
+          this.router.navigate(['/pacientes-read'])
+        }
+      )
 
-    } else{
+    } else {
       Swal.fire({
         icon: 'warning',
         title: 'Campos obrigatórios faltando.',

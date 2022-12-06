@@ -1,3 +1,4 @@
+import { NgChartsModule } from 'ng2-charts';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -45,7 +46,10 @@ import { ObitoEditComponent } from './component/obito/obito-edit/obito-edit.comp
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { DashboardComponent } from './component/dashboard/dashboard/dashboard.component';
+import { ContadorComponent } from './component/dashboard/contador/contador.component';
+import { IndicadoresComponent } from './component/dashboard/indicadores/indicadores.component';
+
 
 
 @NgModule({
@@ -66,6 +70,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
     ObitoReadComponent,
     ObitoEditComponent,
     DashboardComponent,
+    ContadorComponent,
+    IndicadoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,7 +101,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
     MatRadioModule,
     MatGridListModule,
     MatMenuModule,
-    LayoutModule
+    LayoutModule,
+    NgChartsModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
