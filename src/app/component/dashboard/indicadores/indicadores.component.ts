@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartData, ChartOptions } from 'chart.js';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Chart, ChartData, ChartOptions } from 'chart.js';
 import * as moment from 'moment';
 
 @Component({
@@ -8,6 +8,8 @@ import * as moment from 'moment';
   styleUrls: ['./indicadores.component.css']
 })
 export class IndicadoresComponent implements OnInit {
+
+  @ViewChild("canvas", {static: true}) element?: ElementRef;
 
   date: any = new Date();
   DATA_COUNT = 7;
@@ -45,6 +47,19 @@ export class IndicadoresComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.NUMBER_CFG)
     this.dias();
+
+    new Chart(this.element?.nativeElement, {
+      type: 'line',
+      data: {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+        datasets: [
+        {
+          data: [85,12,32,65,12]
+        }
+        ]
+      }
+    })
+
   }
 
   dias() {
