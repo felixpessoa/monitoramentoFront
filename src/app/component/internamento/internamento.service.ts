@@ -47,6 +47,17 @@ export class InternamentoService {
     )
   }
 
+
+  findByDatainAndfi(dataDe:any, dataAte:any): Observable<Internacao[]>{
+    const url = `${this.baseUrl}/datas?dataDe=${dataDe}&dataAte=${dataAte}`
+    return this.http.get<Internacao[]>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
+  
+
+
   update(internacao: Internacao): Observable<Internacao>{
     const url = `${this.baseUrl}/${internacao.id}`
     return this.http.put<Internacao>(url, internacao).pipe(

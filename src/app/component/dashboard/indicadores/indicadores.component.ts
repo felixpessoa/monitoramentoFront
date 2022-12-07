@@ -1,3 +1,5 @@
+import { Internacao } from './../../internamento/internamento.model';
+import { InternamentoService } from './../../internamento/internamento.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartData, ChartOptions } from 'chart.js';
 import * as moment from 'moment';
@@ -9,14 +11,20 @@ import * as moment from 'moment';
 })
 export class IndicadoresComponent implements OnInit {
 
-  @ViewChild("canvas", {static: true}) element?: ElementRef;
+  @ViewChild("canvas", { static: true }) element?: ElementRef;
+  @ViewChild("canvas2", { static: true }) element2?: ElementRef;
 
-  date: any = new Date();
-  DATA_COUNT = 7;
-  NUMBER_CFG = { count: this.DATA_COUNT, min: 0, max: 100 };
+  internacao: any[] = [];
+  // data1: any = moment.utc(new Date('12/07/2022')).format('DD/MM/YYYY');
+  // data2: any = moment.utc(new Date('12/10/2022')).format('DD/MM/YYYY');
+  data1: any = new Date('12/05/2022');
+  data2: any = new Date('12/07/2022');
+  labelsDate: any[] = [];
+  dataAdm: any[] = [];
+  internamentos: any[] = [];
 
-  labels:any = [];
-  
+  labels: any = [];
+
 
   salesData: ChartData<'line'> = {
     labels: this.labels,
@@ -39,34 +47,97 @@ export class IndicadoresComponent implements OnInit {
   };
 
   constructor(
-
+    private internamentoService: InternamentoService,
   ) {
-    
-   }
 
-  ngOnInit(): void {
-    console.log(this.NUMBER_CFG)
-    this.dias();
+  }
+
+   ngOnInit(): void {
+    this.getAdm()
+    this.arrayData(this.data1, this.data2);
+    // await this.adcaoDiaria();
 
     new Chart(this.element?.nativeElement, {
       type: 'line',
       data: {
         labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
         datasets: [
-        {
-          data: [85,12,32,65,12]
-        }
+          {
+            data: [85, 12, 32, 65, 12]
+          }
         ]
+      }
+    })
+
+    new Chart(this.element2?.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: this.labelsDate.sort(),
+        datasets: [{
+          type: 'bar',
+          label: 'Dataset 1',
+          backgroundColor: '#FF0000',
+          borderColor: '#FF0000',
+          data: this.dataAdm,
+        }, {
+          type: 'bar',
+          label: 'Dataset 2',
+          backgroundColor: '#40E0D0',
+          borderColor: '#40E0D0',
+          data: [85, 12, 32, 65, 12],
+        }, {
+          type: 'line',
+          label: 'Dataset 3',
+          backgroundColor: '#3CB371',
+          borderColor: '#3CB371',
+          fill: false,
+          data: [85, 12, 32, 65, 12],
+        }]
       }
     })
 
   }
 
-  dias() {
-    for (let i = 0; i < this.DATA_COUNT; ++i) {
-      this.labels.push(moment.utc(new Date(i)).format('DD/MM/YYYY'));
-      
+  adcaoDiaria(internacao: any) {
+   
+    var contador: number = 0
+    
+    this.internacao = internacao;
+
+    this.labelsDate.forEach(res => {
+      this.internacao.forEach(data => {
+        if(res === data.inicio) {
+          contador = contador + 1;
+        }
+      })
+      this.dataAdm.push(contador);
+      contador = 0;
+    })
+
+  }
+
+
+
+  async getAdm() {
+    const d1 = moment.utc(this.data1).format('DD/MM/YYYY');
+    const d2 = moment.utc(this.data2).format('DD/MM/YYYY');
+    await this.internamentoService.findByDatainAndfi(d1, d2).subscribe(res => {
+      var internacao = res;
+      // console.log('LISTA DE INTERNACAO',this.internacao);
+      this.adcaoDiaria(internacao)
+    })
+    
+  }
+
+  arrayData(data1: any, data2: any) {
+    const d1 = data1;
+    this.labelsDate.push(moment.utc(data2).format('DD/MM/YYYY'));
+    while (d1 < data2) {
+      console.log(d1);
+      this.labelsDate.push(moment.utc(d1).format('DD/MM/YYYY'));
+      d1.setDate(d1.getDate() + 1);
     }
+    console.log('Lista de datas', this.labelsDate.sort());
   }
 
 
