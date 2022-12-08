@@ -16,6 +16,14 @@ export class ObitoService {
     private http: HttpClient,
   ) { }
 
+  findByDatainAndfi(dataDe:any, dataAte:any): Observable<Obito[]>{
+    const url = `${this.baseUrl}/datas?dataDe=${dataDe}&dataAte=${dataAte}`
+    return this.http.get<Obito[]>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
+
   create(obito: Obito): Observable<Obito> {
     return this.http.post<Obito>(this.baseUrl, obito).pipe(
       map(obj => obj),

@@ -1,32 +1,32 @@
-<div class="container">
-    <!-- <div class="card mt-2">
-        <div class="card-body">
-            <h4 class="card-title">Bar Chart</h4>
-            <canvas baseChart [data]="salesData" [type]="'bar'" [options]="chartOptions">
-            </canvas>
-        </div>
-    </div>
-    <div class="card mt-2">
-        <div class="card-body">
-            <h4 class="card-title">Bar Chart2</h4>
-            <canvas #canvas>
-            </canvas>
-        </div>
-    </div> -->
-</div>
+<div>
     <div>
-        <div>
-            <h4 class="card-title">Bar Chart2</h4>
-            <canvas #canvas2>
-            </canvas>
-        </div>
-    </div>
+        <form [formGroup]="form">
+            <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data de</mat-label>
+                        <input matInput [matDatepicker]="date1" [(ngModel)]="data1" formControlName="dataDe" [disabled]="true">
+                        <mat-datepicker-toggle matSuffix [for]="date1"></mat-datepicker-toggle>
+                        <mat-datepicker #date1 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data ate</mat-label>
+                        <input matInput [matDatepicker]="date2" [(ngModel)]="data2" formControlName="dataAte" [disabled]="true">
+                        <mat-datepicker-toggle matSuffix [for]="date2"></mat-datepicker-toggle>
+                        <mat-datepicker #date2 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <button mat-raised-button (click)="carregarData()">Open</button>
+            </tr>
+        </table>
+        </form>
 
-    <!-- <button (click)="adcaoDiaria()">teste</button> -->
-    <!-- <div class="card mt-2">
-        <div class="card-body">
-            <h4 class="card-title">Line Chart</h4>
-            <canvas baseChart [data]="salesData" [type]="'line'" [options]="chartOptions">
-            </canvas>
-        </div>
-    </div> -->
+
+        <h4 class="card-title">Bar Chart2</h4>
+        <canvas #canvas>
+        </canvas>
+    </div>
+</div>

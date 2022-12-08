@@ -16,6 +16,14 @@ export class AltaService {
     private http: HttpClient,
   ) { }
 
+  findByDatainAndfi(dataDe:any, dataAte:any): Observable<Alta[]>{
+    const url = `${this.baseUrl}/datas?dataDe=${dataDe}&dataAte=${dataAte}`
+    return this.http.get<Alta[]>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
+
   create(alta: Alta): Observable<Alta> {
     return this.http.post<Alta>(this.baseUrl, alta).pipe(
       map(obj => obj),

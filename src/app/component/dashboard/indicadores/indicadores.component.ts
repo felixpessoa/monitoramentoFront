@@ -1,7 +1,12 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { AltaService } from './../../alta/alta.service';
+import { Alta } from './../../alta/alta.model';
+import { Obito } from './../../obito/obito.mode';
+import { ObitoService } from './../../obito/obito.service';
 import { Internacao } from './../../internamento/internamento.model';
 import { InternamentoService } from './../../internamento/internamento.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart, ChartData, ChartOptions } from 'chart.js';
+import { Chart } from 'chart.js';
 import * as moment from 'moment';
 
 @Component({
@@ -12,98 +17,103 @@ import * as moment from 'moment';
 export class IndicadoresComponent implements OnInit {
 
   @ViewChild("canvas", { static: true }) element?: ElementRef;
-  @ViewChild("canvas2", { static: true }) element2?: ElementRef;
+ 
 
-  internacao: any[] = [];
+  internacao: Internacao[] = [];
+  obitos: Obito[] = [];
+  altas: Alta[] = [];
   // data1: any = moment.utc(new Date('12/07/2022')).format('DD/MM/YYYY');
   // data2: any = moment.utc(new Date('12/10/2022')).format('DD/MM/YYYY');
-  data1: any = new Date('12/05/2022');
-  data2: any = new Date('12/07/2022');
+  data1: any = new Date();
+  data2: any = new Date();
+  
   labelsDate: any[] = [];
-  dataAdm: any[] = [];
   internamentos: any[] = [];
-
   labels: any = [];
+  
+  dataAdm: any[] = [];
+  dataObito: any[] = [];
+  dataAlta: any[] = [];
 
+  form: any = FormGroup;
+ 
 
-  salesData: ChartData<'line'> = {
-    labels: this.labels,
-    datasets: [
-      { label: 'ADMISSÕES', data: [1000, 1200, 1050, 2000, 500], tension: 0.5 },
-      { label: 'ÓBITOS', data: [200, 100, 400, 50, 90], tension: 0.5 },
-      { label: 'CURA/ALTA', data: [500, 400, 350, 450, 650], tension: 0.5 },
-      // { label: 'Headset', data: [1200, 1500, 1020, 1600, 900], tension: 0.5 },
-    ],
-  };
-
-  chartOptions: ChartOptions = {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: 'Monthly Sales Data',
-      },
-    },
-  };
+  
 
   constructor(
+    private fb: FormBuilder,
     private internamentoService: InternamentoService,
+    private obitoService: ObitoService,
+    private altaService: AltaService,
+    
   ) {
+    
 
+    this.form = this.fb.group({
+      dataDe: [''],
+      dataAte: [''],
+    })
   }
 
    ngOnInit(): void {
-    this.getAdm()
+    this.data1.setDate(this.data2.getDate() - 15);
+    console.log('data de hoje é ',this.data1, ' e de 15 dias atras é ', this.data2);
+
+    this.getAdm();
+    this.getObito();
+    this.getAlta();
+
     this.arrayData(this.data1, this.data2);
-    // await this.adcaoDiaria();
-
-    new Chart(this.element?.nativeElement, {
-      type: 'line',
-      data: {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
-        datasets: [
-          {
-            data: [85, 12, 32, 65, 12]
-          }
-        ]
-      }
-    })
-
-    new Chart(this.element2?.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: this.labelsDate.sort(),
-        datasets: [{
-          type: 'bar',
-          label: 'Dataset 1',
-          backgroundColor: '#FF0000',
-          borderColor: '#FF0000',
-          data: this.dataAdm,
-        }, {
-          type: 'bar',
-          label: 'Dataset 2',
-          backgroundColor: '#40E0D0',
-          borderColor: '#40E0D0',
-          data: [85, 12, 32, 65, 12],
-        }, {
-          type: 'line',
-          label: 'Dataset 3',
-          backgroundColor: '#3CB371',
-          borderColor: '#3CB371',
-          fill: false,
-          data: [85, 12, 32, 65, 12],
-        }]
-      }
-    })
 
   }
 
-  adcaoDiaria(internacao: any) {
-   
-    var contador: number = 0
-    
-    this.internacao = internacao;
+  carregarData() {
+    console.log('data de hoje é ',moment.utc(this.form.value.dataDe).format('DD/MM/YYYY'), ' e de 15 dias atras é ', moment.utc(this.form.value.dataAte).format('DD/MM/YYYY'));
+    // this.arrayData(new Date(), new Date())
+    this.arrayData(this.form.value.dataDe, this.form.value.dataAte)
+    this.grafico();
+  }
 
+  grafico(): Chart {
+    return new Chart(this.element?.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: this.labelsDate,
+        datasets: [{
+          type: 'bar',
+          label: 'ADMISSÕES',
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor:  'rgb(54, 162, 235)',
+          
+          data: this.dataAdm,
+        }, {
+          type: 'bar',
+          label: 'ÓBITOS',
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: this.dataObito,
+        }, {
+          type: 'bar',
+          label: 'CURA/ALTA',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgb(75, 192, 192)',
+          data: this.dataAlta,
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            text: 'Chart.js Combo Time Scale',
+            display: true
+          }
+        },
+      },
+    })
+  }
+
+  adcaoDiaria(internacao: any) {
+    var contador: number = 0
+    this.internacao = internacao;
     this.labelsDate.forEach(res => {
       this.internacao.forEach(data => {
         if(res === data.inicio) {
@@ -113,7 +123,38 @@ export class IndicadoresComponent implements OnInit {
       this.dataAdm.push(contador);
       contador = 0;
     })
+    this.grafico();
+  }
 
+  addObito(obj: any) {
+    var contador: number = 0
+    this.obitos = obj;
+    this.labelsDate.forEach(res => {
+      this.obitos.forEach(data => {
+        if(res === data.dataObito) {
+          contador = contador + 1;
+        }
+      })
+      this.dataAdm.push(contador);
+      contador = 0;
+    })
+    this.grafico();
+  }
+
+
+  addAlta(obj: any) {
+    var contador: number = 0
+    this.altas = obj;
+    this.labelsDate.forEach(res => {
+      this.dataAlta.forEach(data => {
+        if(res === data.dataAlta) {
+          contador = contador + 1;
+        }
+      })
+      this.dataAdm.push(contador);
+      contador = 0;
+    })
+    this.grafico();
   }
 
 
@@ -129,15 +170,45 @@ export class IndicadoresComponent implements OnInit {
     
   }
 
+  async getObito() {
+    const d1 = moment.utc(this.data1).format('DD/MM/YYYY');
+    const d2 = moment.utc(this.data2).format('DD/MM/YYYY');
+    await this.obitoService.findByDatainAndfi(d1, d2).subscribe(res => {
+      var obj = res;
+      // console.log('LISTA DE INTERNACAO',this.internacao);
+      this.addObito(obj)
+    })
+    
+  }
+
+  async getAlta() {
+    const d1 = moment.utc(this.data1).format('DD/MM/YYYY');
+    const d2 = moment.utc(this.data2).format('DD/MM/YYYY');
+    await this.altaService.findByDatainAndfi(d1, d2).subscribe(res => {
+      var obj = res;
+      // console.log('LISTA DE INTERNACAO',this.internacao);
+      this.addAlta(obj)
+    })
+    
+  }
+
   arrayData(data1: any, data2: any) {
+    while(this.labelsDate.length) {
+      this.labelsDate.pop();
+    }
     const d1 = data1;
-    this.labelsDate.push(moment.utc(data2).format('DD/MM/YYYY'));
-    while (d1 < data2) {
+    // if (moment(d1).isSame(data2)){
+
+    // }
+    // while (d1 > data2) {
+    while (!moment(d1).isSame(data2)) {
       console.log(d1);
       this.labelsDate.push(moment.utc(d1).format('DD/MM/YYYY'));
       d1.setDate(d1.getDate() + 1);
     }
-    console.log('Lista de datas', this.labelsDate.sort());
+    this.labelsDate.push(moment.utc(data2).format('DD/MM/YYYY'));
+
+    console.log('Lista de datas', this.labelsDate);
   }
 
 
