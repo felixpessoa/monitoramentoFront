@@ -49,6 +49,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { DashboardComponent } from './component/dashboard/dashboard/dashboard.component';
 import { ContadorComponent } from './component/dashboard/contador/contador.component';
 import { IndicadoresComponent } from './component/dashboard/indicadores/indicadores.component';
+import { IndicadoresMesComponent } from './component/dashboard/indicadores-mes/indicadores-mes.component';
 
 
 
@@ -72,6 +73,7 @@ import { IndicadoresComponent } from './component/dashboard/indicadores/indicado
     DashboardComponent,
     ContadorComponent,
     IndicadoresComponent,
+    IndicadoresMesComponent,
   ],
   imports: [
     BrowserModule,
