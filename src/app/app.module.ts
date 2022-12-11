@@ -50,6 +50,9 @@ import { DashboardComponent } from './component/dashboard/dashboard/dashboard.co
 import { ContadorComponent } from './component/dashboard/contador/contador.component';
 import { IndicadoresComponent } from './component/dashboard/indicadores/indicadores.component';
 import { IndicadoresMesComponent } from './component/dashboard/indicadores-mes/indicadores-mes.component';
+import { SetorCreateComponent } from './component/setor/setor-create/setor-create.component';
+import { SetorReadComponent } from './component/setor/setor-read/setor-read.component';
+import { SetorEditComponent } from './component/setor/setor-edit/setor-edit.component';
 
 
 
@@ -74,6 +77,9 @@ import { IndicadoresMesComponent } from './component/dashboard/indicadores-mes/i
     ContadorComponent,
     IndicadoresComponent,
     IndicadoresMesComponent,
+    SetorCreateComponent,
+    SetorReadComponent,
+    SetorEditComponent,
   ],
   imports: [
     BrowserModule,

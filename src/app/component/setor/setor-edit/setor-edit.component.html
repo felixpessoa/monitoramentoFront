@@ -1,0 +1,56 @@
+<mat-card class="mat-elevation-z9">
+
+    <mat-card-title>Editar Informação</mat-card-title>
+    <form [formGroup]="form">
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Registro</mat-label>
+                        <input matInput [disabled]="true" formControlName="id">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Nome do setor</mat-label>
+                        <input matInput formControlName="nome">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Status</mat-label>
+                        <input matInput formControlName="ativo">
+                    </mat-form-field> 
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data de cadastro</mat-label>
+                        <input matInput type="datetime-local" [disabled]="true" formControlName="dataCadastro" [disabled]="true">
+                        <!-- <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                        <mat-datepicker #date disabled="false"></mat-datepicker> -->
+                    </mat-form-field> 
+
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <!-- <button mat-raised-button color="primary" (click)="submit()">
+        Salvar
+    </button> -->
+    <button mat-raised-button (click)="upDate()" color="primary">
+        Salvar
+    </button>
+
+    <button mat-raised-button (click)="dialogRef.close(false)" color="primary">
+        Cancelar
+    </button>
+
+
+</mat-card>

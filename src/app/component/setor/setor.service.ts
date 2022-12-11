@@ -16,10 +16,24 @@ export class SetorService {
     private http: HttpClient,
   ) { }
 
+  create(setor: Setor): Observable<Setor> {
+    return this.http.post<Setor>(this.baseUrl, setor).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    );
+  }
 
 findById(id: number): Observable<Setor> {
     const url = `${this.baseUrl}/${id}`
     return this.http.get<Setor>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
+
+  buscarTodos(): Observable<Setor[]> {
+    const url = `${this.baseUrl}`
+    return this.http.get<Setor[]>(url).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )

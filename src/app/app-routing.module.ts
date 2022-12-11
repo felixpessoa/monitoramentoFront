@@ -1,3 +1,6 @@
+import { SetorEditComponent } from './component/setor/setor-edit/setor-edit.component';
+import { SetorReadComponent } from './component/setor/setor-read/setor-read.component';
+import { SetorCreateComponent } from './component/setor/setor-create/setor-create.component';
 import { DashboardComponent } from './component/dashboard/dashboard/dashboard.component';
 import { ObitoEditComponent } from './component/obito/obito-edit/obito-edit.component';
 import { ObitoReadComponent } from './component/obito/obito-read/obito-read.component';
@@ -61,6 +64,18 @@ const routes: Routes = [
   {
     path: 'obito-edit/:id',
     component: ObitoEditComponent
+  },
+  {
+    path: 'setor-create',
+    component: SetorCreateComponent
+  },
+  {
+    path: 'setor-read',
+    component: SetorReadComponent
+  },
+  {
+    path: 'setor-edit/:id',
+    component: SetorEditComponent
   }
 ];
 
